@@ -1,0 +1,87 @@
+GET _cat/indices/olympic-events*/?v&h=index,health,docs.count,pri.store.size
+
+
+GET _cluster/allocation/explain
+
+PUT olympic-events/_settings
+{
+  "number_of_replicas": 0
+}
+
+GET olympic-events/_mapping
+
+GET olympic-events/_search
+{
+  "size": 0,
+  "aggs": {
+    "ages": {
+      "terms": {
+        "field": "Age",
+        "size": 100
+      }
+    }
+  }
+}
+
+POST _reindex
+{
+  "source": {
+    "index": "olympic-events"    
+  },
+  "dest": {
+    "index": "olympic-events-backup"
+  }
+}
+
+POST olympic-events/_delete_by_query
+{
+ "query": {
+   "bool": {
+     "should": [
+       {"term": {
+         "Height": {
+           "value": "NA"
+         }
+       }},
+       {
+         "term": {
+           "Age": {
+             "value": "NA"
+           }
+         }
+       },
+       {
+         "term": {
+           "Weight": {
+             "value": "NA"
+           }
+         }
+       }
+     ],
+     "minimum_should_match": 1
+   }
+ }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
