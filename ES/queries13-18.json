@@ -9,3 +9,5 @@ POST _reindex
   }
 }
 
+GET _cat/indices/olympic-events*
+POST olympic-events-fixed/_refresh
