@@ -1,0 +1,11 @@
+POST _reindex
+{
+  "source": {
+    "index": "olympic-events"
+  },
+  "dest": {
+    "index": "olympic-events-fixed",
+    "pipeline": "split_games"
+  }
+}
+
