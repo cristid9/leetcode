@@ -63,6 +63,53 @@ POST olympic-events/_delete_by_query
  }
 }
 
+PUT _ingest/pipeline/split_games
+{
+  "processors": [
+    {
+      "split": {
+        "field": "Games",
+        "separator": " ",
+        "target_field": "Games_split"
+      }
+    },
+    {
+      "set": {
+        "field": "year",
+        "value": "{{Games_split.0}}"
+      }
+      
+    },
+    {  
+     "set": {
+        "field": "season",
+        "value": "{{Games_split.1}}"
+      }
+    },
+    {
+      "remove": {
+        "field": "Games"
+      }
+    },
+    {
+      "remove": {
+        "field": "Games_split"
+      }
+    }
+    
+  ]
+}
+
+POST _ingest/pipeline/split_games/_simulate
+{
+  "docs": [
+    {
+      "_source": {
+        "Games": "1998 Summer"
+      }
+    }
+  ]
+}
 
 
 
