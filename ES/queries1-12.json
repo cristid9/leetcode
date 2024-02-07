@@ -111,7 +111,53 @@ POST _ingest/pipeline/split_games/_simulate
   ]
 }
 
-
+PUT /olympic-events-fixed
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "properties": {
+      "athleteId": { "type": "integer" },
+      "age": {"type": "short"},
+      "height": {"type": "short"},
+      "weight": {"type": "short"},
+      "athleteName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "gender": {"type": "keyword"},
+      "team": {"type": "keyword"},
+      "noc": {"type": "keyword"},
+      "year": {"type": "short"},
+      "season": {"type": "keyword"},
+      "city": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "sport": {"type": "keyword"},
+      "event": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+        
+      },
+      "medal": {"type": "keyword"}
+    }
+  }
+}
 
 
 
