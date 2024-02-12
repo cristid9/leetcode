@@ -11,3 +11,53 @@ POST _reindex
 
 GET _cat/indices/olympic-events*
 POST olympic-events-fixed/_refresh
+
+POST _template/olympic-events
+{
+  "index_patterns": ["olympic-events-*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "athleteId": { "type": "integer" },
+      "age": {"type": "short"},
+      "height": {"type": "short"},
+      "weight": {"type": "short"},
+      "athleteName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "gender": {"type": "keyword"},
+      "team": {"type": "keyword"},
+      "noc": {"type": "keyword"},
+      "year": {"type": "short"},
+      "season": {"type": "keyword"},
+      "city": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "sport": {"type": "keyword"},
+      "event": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+        
+      },
+      "medal": {"type": "keyword"}
+    }
+  }
+}
