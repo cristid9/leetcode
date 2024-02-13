@@ -167,3 +167,7 @@ POST _ingest/pipeline/reconcile_fields/_simulate
     }
   ]
 }
+
+DELETE /olympic-events-fixed
+
+
