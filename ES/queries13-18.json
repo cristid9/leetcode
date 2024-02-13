@@ -170,4 +170,19 @@ POST _ingest/pipeline/reconcile_fields/_simulate
 
 DELETE /olympic-events-fixed
 
+GET _cat/tasks
+POST _reindex
+{
+  "source": {
+    "index": "olympic-events"
+  },
+  "dest": {
+    "index": "olympic-events-fixed",
+    "pipeline": "reconcile_fields"
+  }
+}
+
+GET _cat/indices/olympic-events*
+GET olympic-events-fixed/_search
+
 
