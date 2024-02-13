@@ -1,0 +1,19 @@
+GET olympic-events-fixed/_search
+{
+  "size": 100,
+  "query": {
+    "term": {
+      "sport": {
+        "value": "Gymnastics"
+      }
+    }
+  },
+  "aggs": {
+    "event_type": {
+      "terms": {
+        "field": "event.keyword",
+        "size": 100
+      }
+    }
+  }
+}
