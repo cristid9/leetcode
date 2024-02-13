@@ -61,3 +61,86 @@ POST _template/olympic-events
     }
   }
 }
+
+PUT _ingest/pipeline/reconcile_fields
+{
+  "processors": [
+    {
+      "rename": {
+        "field": "ID",
+        "target_field": "athleteId"
+      }
+    },
+    {
+      "rename": {
+        "field": "Name",
+        "target_field": "athleteName"
+      }
+    },
+    {
+      "rename": {
+        "field": "Age",
+        "target_field": "age"
+      }
+    },
+    {
+      "rename": {
+        "field": "Height",
+        "target_field": "height"
+      }
+    },
+    {
+      "rename": {
+        "field": "Weight",
+        "target_field": "weight"
+      }
+    },
+    {
+      "rename": {
+        "field": "Sex",
+        "target_field": "gender"
+      }
+    },
+    {
+      "rename": {
+        "field": "Team",
+        "target_field": "team"
+      }
+    },
+    {
+      "rename": {
+        "field": "NOC",
+        "target_field": "noc"
+      }
+    },
+    {
+      "rename": {
+        "field": "Sport",
+        "target_field": "sport"
+      }
+    },
+    {
+      "rename": {
+        "field": "Event",
+        "target_field": "event"
+      }
+    },
+    {
+      "rename": {
+        "field": "City",
+        "target_field": "city"
+      }
+    },
+    {
+      "rename": {
+        "field": "Medal",
+        "target_field": "medal"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "split_games"
+      }
+    }
+  ]
+}
