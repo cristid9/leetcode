@@ -70,3 +70,15 @@ GET olympic-events-fixed/_search
       }
     }
 }
+
+GET olympic-events-fixed/_search
+{ 
+  "_source": ["athleteName", "team", "sport", "age", "height", "weight", "gender"],
+  "query": {
+    "term": {
+      "year": {
+        "value": "2016"
+      }
+    }  
+  }
+}
