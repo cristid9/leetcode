@@ -159,6 +159,28 @@ PUT /olympic-events-fixed
   }
 }
 
+POST _ingest/pipeline/reconcile_fields/_simulate
+{
+  "docs": [
+    {
+      "_source": {
+        "NOC": "ARG",
+        "Sex": "M",
+        "City": "Los Angeles",
+        "Weight": "98",
+        "Name": "Ernesto Arturo Alas",
+        "Sport": "Shooting",
+        "Games": "1984 Summer",
+        "Event": "Shooting Men's Free Pistol, 50 metres",
+        "Height": "186",
+        "Team": "Argentina",
+        "ID": 2224,
+        "Medal": "NA",
+        "Age": "54"
+      }
+    }
+  ]
+}
 
 
 
