@@ -44,3 +44,29 @@ GET olympic-events-fixed/_search
       }
     }
 }
+
+GET olympic-events-fixed/_search
+{
+
+  "size": 0,
+  "aggs": {
+    "events": {
+      "terms": {
+          "field": "event.keyword",
+          "size": 590
+        },
+        "aggs": {
+          "recent": {
+            "min": {
+              "field": "year"
+            }
+          }
+        }
+      },
+      "most_recent": {
+        "max_bucket": {
+          "buckets_path": "events>recent"
+        }
+      }
+    }
+}
