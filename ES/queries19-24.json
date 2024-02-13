@@ -82,3 +82,24 @@ GET olympic-events-fixed/_search
     }  
   }
 }
+
+GET olympic-events-fixed/_search
+{ 
+  "_source": ["athleteName", "team", "sport", "age", "height", "weight", "gender"],
+  "script_fields": {
+    "weightLbs": {
+      "script": {
+        "lang": "painless",  // Specify the scripting language, default is painless
+        "source": "doc['weight'].value * 2.2"  // The script itself
+      }
+    }
+  },
+  "query": {
+    "term": {
+      "year": {
+        "value": "2016"
+      }
+    }  
+  }
+}
+
