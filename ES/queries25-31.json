@@ -17,3 +17,39 @@ GET olympic-events-fixed/_search
     }
   ]
 }
+
+GET olympic-events-fixed/_search
+{
+  "size": 100,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "sport": "Swimming"
+          }
+        }
+      ], 
+      "should": [
+        {
+          "range" : {
+            "weight" : {
+                "_name": "weight",
+                "gte" : 60,
+                "lte" : 70
+            }
+         }
+       },
+       {
+         "range": {
+           "age": {
+             "_name": "age",
+             "lte": 20
+           }
+         }
+       }
+     ],
+     "minimum_should_match": 1
+    }
+  }
+}
