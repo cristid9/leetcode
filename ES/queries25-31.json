@@ -53,3 +53,11 @@ GET olympic-events-fixed/_search
     }
   }
 }
+
+PUT olympic-noc-regions/_settings
+{
+  "settings":{
+    "number_of_replicas":0
+  }
+}
+GET _cat/indices/olympic-noc-regions?v
