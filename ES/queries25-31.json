@@ -1,1 +1,19 @@
 
+GET olympic-events-fixed/_search
+{
+  "size": 50, 
+  "query": {
+    "term": {
+      "medal": {
+        "value": "Gold"
+      }
+    }
+  },
+  "sort": [
+    {
+      "age": {
+        "order": "desc"
+      }
+    }
+  ]
+}
