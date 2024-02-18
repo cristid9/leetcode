@@ -61,3 +61,48 @@ PUT olympic-noc-regions/_settings
   }
 }
 GET _cat/indices/olympic-noc-regions?v
+
+PUT _enrich/policy/olympic-noc-append
+{
+  "match": {
+    "indices": "olympic-noc-regions",
+    "match_field": "noc",
+    "enrich_fields": ["region", "notes"]
+  }
+}
+
+POST _enrich/policy/olympic-noc-append/_execute
+
+
+PUT _ingest/pipeline/enrich-noc
+{
+  "processors": [
+    {
+      "enrich": {
+        "policy_name": "olympic-noc-append",
+        "field": "noc",
+        "target_field": "nocDetails"
+      }
+    }
+  ]
+}
+
+PUT olympic-events-enriched
+
+PUT olympic-events-enriched/_mapping
+{
+  "dynamic": "true"
+}
+
+
+POST _reindex
+{
+  "source": {
+    "index": "olympic-events-fixed"
+  },
+  "dest": {
+    "index": "olympic-events-enriched",
+    "pipeline": "enrich-noc"
+  }
+}
+
