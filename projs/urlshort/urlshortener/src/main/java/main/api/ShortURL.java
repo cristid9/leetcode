@@ -23,7 +23,7 @@ public class ShortURL {
     @PostMapping(path = "/short")
     public ResponseEntity<String> makeShort(@RequestParam String url) {
         var entty = urlService.createUrl(url);
-        return new ResponseEntity<>(entty.getShortenedUrl(), HttpStatus.CREATED);
+        return new ResponseEntity<>("http://149.202.9.27/redirect/" + entty.getShortenedUrl(), HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/redirect/{hash}")

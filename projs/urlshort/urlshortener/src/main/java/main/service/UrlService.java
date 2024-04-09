@@ -16,7 +16,7 @@ public class UrlService {
 
 
     public UrlEntity getLongUrlByShort(String shortened) {
-        return urlRepository.findByShortenedUrl(shortened).orElse(null);
+        return urlRepository.findOptionalByShortenedUrl(shortened).orElse(null);
     }
 
     @Transactional
