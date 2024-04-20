@@ -1,19 +1,18 @@
 package main.service;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.repository.UrlEntity;
 import main.repository.UrlRepository;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 //@RequiredArgsConstructor
 public class UrlService {
 
-    @Autowired
     private UrlRepository urlRepository;
-
 
     public UrlEntity getLongUrlByShort(String shortened) {
         return urlRepository.findOptionalByShortenedUrl(shortened).orElse(null);
